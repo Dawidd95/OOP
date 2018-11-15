@@ -1,0 +1,93 @@
+package z29;
+import java.util.Scanner;
+
+public class Z29 
+{
+ 
+    public static void main(String[] args) 
+    {
+   
+        //książka adresowa - max 100 osób
+        Osoba[] ksiazka_adresowa=new Osoba[100];
+        Scanner ObiektPrzycisk = new Scanner(System.in);
+        int opcja; 
+        int licznik=0;              
+        //menu
+        do
+        {
+            System.out.println("-------- MENU --------------------------");
+            System.out.println("1 - wprowadź wpis");
+            System.out.println("2 - usuń wpis");
+            System.out.println("3 - pokaż wszystkie wpisy");
+            System.out.println("4 - wyjście");
+            System.out.println("----------------------------------------");
+            System.out.print("Wybierz jedną z opcji: ");
+            opcja= ObiektPrzycisk.nextInt();
+            switch (opcja)
+            {
+                case 1:
+                {   
+                    System.out.println("WPROWADŹ WPIS ----------------------------------------");
+                    ksiazka_adresowa[licznik]=new Osoba();
+                    ksiazka_adresowa[licznik].PodajNazwisko();
+                    ksiazka_adresowa[licznik].PodajTelefon();
+                    licznik++;        
+                    break;
+                }
+                case 2:
+                {   
+                    System.out.println("USUŃ WPIS ----------------------------------------");
+                    System.out.print("Podaj nr wpisu do usunięcia: ");
+                    int nr = ObiektPrzycisk.nextInt();
+                    System.out.println(nr);
+                    ksiazka_adresowa[nr-1].nazwisko="";
+                    ksiazka_adresowa[nr-1].telefon="";  
+                    break;
+                }      
+                case 3:
+                {
+                    System.out.println("WSZYSTKIE WPISY ----------------------------------------");
+                    for (int i=0;i<licznik;i++)
+                    {
+                       if (ksiazka_adresowa[i].PokazNazwisko()!="")
+                       System.out.println(i+1+" - "+ksiazka_adresowa[i].PokazNazwisko());            
+                    } 
+                    break;
+                } 
+                case 4:break;
+                default:System.out.println("Nie wybrano właściwej opcji");
+            }
+        }
+        while (opcja!=4);
+    }   
+}
+//-------------------------------------------------------------
+class Osoba
+{
+    //składowe klasy Osoba
+    //public int licznik=0;
+    
+    public String nazwisko;
+    public String telefon;
+    //metody klasy Osoba
+    public String PodajNazwisko()
+    {
+        Scanner ObiektString = new Scanner(System.in);
+        System.out.print("Podaj nazwisko:");
+        String new_naz = ObiektString.next();
+        nazwisko=new_naz;
+        return nazwisko;       
+    }
+    public String PodajTelefon()
+    {
+        Scanner ObiektString = new Scanner(System.in);
+        System.out.print("Podaj telefon:");
+        String new_telefon = ObiektString.next();
+        telefon=new_telefon;       
+        return telefon;       
+    }
+    public String PokazNazwisko()
+    {
+        return nazwisko;
+    }
+}
